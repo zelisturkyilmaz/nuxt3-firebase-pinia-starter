@@ -6,4 +6,12 @@ export default defineNuxtConfig({
     '@pinia/nuxt',
     '@pinia-plugin-persistedstate/nuxt',
   ],
+  runtimeConfig: {
+    public: {
+      firebase: {
+        apiKey: process.env.NUXT_PUBLIC_API_KEY,
+      },
+    },
+  },
+  ssr: false,
 })

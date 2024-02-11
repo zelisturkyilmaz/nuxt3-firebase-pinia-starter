@@ -6,8 +6,7 @@
                     <h1 class="text-xl font-bold  md:text-2xl py-2 mb-2">
                         Sign in to your account
                     </h1>
-                    <div v-if="show_alert" class="text-white text-center font-bold p-4 mb-4"
-                        :class="alert_variant">
+                    <div v-if="show_alert" class="text-white text-center font-bold p-4 mb-4" :class="alert_variant">
                         {{ alert_msg }}
                     </div>
                     <form class="space-y-6" @submit.prevent="login">
@@ -40,6 +39,8 @@
 </template>
 
 <script setup>
+import { useAuthStore } from '~/store/useAuth';
+
 const form = reactive({
     email: '',
     password: '',
@@ -49,8 +50,26 @@ const show_alert = ref(false)
 const alert_variant = ref('bg-blue-500')
 const alert_msg = ref('Please wait! We are logging you in')
 
+const auth = useAuthStore()
+const router = useRouter()
+
+
 async function login() {
-    console.log('Login', form)
+    show_alert.value = true
+    alert_variant.value = 'bg-blue-500'
+    alert_msg.value = 'Please wait! We are logging you in.'
+
+    try {
+        await auth.signInUser(form)
+    } catch (error) {
+        show_alert.value = true
+        alert_variant.value = 'bg-red-500'
+        alert_msg.value = 'Invalid login details.'
+        return
+    }
+    alert_variant.value = 'bg-green-500'
+    alert_msg.value = 'Success! You are now logged in.'
+    router.push({ path: "/private" })
 }
 
 </script>

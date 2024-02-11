@@ -47,6 +47,8 @@
 </template>
 
 <script setup>
+import { useAuthStore } from '~/store/useAuth';
+
 const form = reactive({
     name: '',
     email: '',
@@ -57,8 +59,25 @@ const show_alert = ref(false)
 const alert_variant = ref('bg-blue-500')
 const alert_msg = ref('Please wait! Your account is being created.')
 
+const auth = useAuthStore()
+const router = useRouter()
+
 async function register() {
-    console.log('Register', form)
+    show_alert.value = true
+    alert_variant.value = 'bg-blue-500'
+    alert_msg.value = 'Please wait! Your account is being created.'
+
+    try {
+        await auth.createUser(form)
+    } catch (error) {
+        show_alert.value = true
+        alert_variant.value = 'bg-red-500'
+        alert_msg.value = 'An unexpected error occurred. Please try again later.'
+        return
+    }
+    alert_variant.value = 'bg-green-500'
+    alert_msg.value = 'Success! Your account is created.'
+    router.push({ path: "/private" })
 }
 
 </script>
