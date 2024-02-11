@@ -9,7 +9,7 @@ Firebase Authentication on Web: https://firebase.google.com/docs/auth/web/start
 
 ## Firebase setup
 
-You need to create [Firebase](https://firebase.google.com/docs/auth/web/start) acount and SDK setup. \
+You need to create [Firebase](https://firebase.google.com/docs/auth/web/start) account and setup SDK. 
 
 You need to create .env file with this content from Firebase project:
 
