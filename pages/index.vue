@@ -39,8 +39,6 @@
 </template>
 
 <script setup>
-import { useAuthStore } from '~/store/useAuth';
-
 const form = reactive({
     email: '',
     password: '',

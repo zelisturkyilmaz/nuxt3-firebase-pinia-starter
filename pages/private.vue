@@ -11,8 +11,5 @@
 definePageMeta({
   middleware: ['auth'],
 })
-
-import { useAuthStore } from '~/store/useAuth';
-
   const auth = useAuthStore()
 </script>

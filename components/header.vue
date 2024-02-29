@@ -9,8 +9,6 @@
 </template>
 
 <script setup>
-import { useAuthStore } from "~/store/useAuth"
-
 const auth = useAuthStore()
 const router = useRouter()
 
